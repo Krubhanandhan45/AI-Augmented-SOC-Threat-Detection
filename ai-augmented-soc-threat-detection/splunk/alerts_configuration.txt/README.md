@@ -1,30 +1,26 @@
-# Splunk SOC Dashboard Queries
-# AI-Augmented SOC Threat Detection
+# Splunk Alert Configuration
+# AI-Augmented SOC Detection Alert
 
-# 1 Total AI Detected Anomalies
+Alert Name: AI SOC - Anomaly Spike
+
+Description:
+This alert triggers when the number of anomalies detected by the Isolation Forest model exceeds a defined threshold.
+
+Search Query:
 index=ai_soc
-| stats count as total_anomalies
+| stats count as anomaly_count
 
-# 2 Top Suspicious Source IPs
-index=ai_soc
-| stats count by src_ip
-| sort - count
-| head 10
+Trigger Condition:
+anomaly_count > 20
 
-# 3 Alert Signature Distribution
-index=suricata
-| stats count by alert_signature
-| sort - count
+Trigger Time Window:
+Last 30 minutes
 
-# 4 Destination Port Analysis
-index=suricata
-| stats count by dest_port
-| sort - count
+Alert Action:
+Send email notification to SOC analyst
 
-# 5 Protocol Distribution
-index=suricata
-| stats count by proto
+Severity:
+High
 
-# 6 Anomaly Trend Over Time
-index=ai_soc
-| timechart count
+Purpose:
+Automatically notify SOC analysts when abnormal network behavior spikes are detected by the AI detection pipeline.
