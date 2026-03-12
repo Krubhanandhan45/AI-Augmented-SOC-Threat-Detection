@@ -56,3 +56,5 @@ See the `screenshots/` folder for full evidence of:
 ## Research Paper
 
 Full project paper available in:
+
+paper/AI_Augmented_SOC_for_Real_Time_Network_Threat_Detection.pdf
